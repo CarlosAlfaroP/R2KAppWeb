@@ -1,4 +1,4 @@
-package me.r2kapp.project.apps
+package com.example.r2kappweb.apps
 
 import io.kvision.core.Border
 import io.kvision.core.BorderStyle
