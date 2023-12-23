@@ -23,7 +23,7 @@ class CategoryApp : DesktopWindow("Temario", "fa-solid fa-book-open", 900, 400) 
 
         flexPanel(FlexDirection.ROW, FlexWrap.WRAP, alignContent = AlignContent.STRETCH, alignItems = AlignItems.STRETCH) {
             justifyContent = JustifyContent.CENTER
-            for (i in temas) {
+            for (i in cards) {
                 add(createCard(i.nombre, i.subtitulo, i.descripcion, i.rutaBanner))
             }
         }

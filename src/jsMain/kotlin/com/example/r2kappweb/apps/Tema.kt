@@ -7,7 +7,7 @@ data class Tema(
     val rutaBanner: String
 )
 
-val temas = listOf(
+val cards = listOf(
     Tema(
         "La Persona y los Derechos Humanos",
         "Derechos y Responsabilidades",
