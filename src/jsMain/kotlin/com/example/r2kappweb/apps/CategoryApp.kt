@@ -9,7 +9,6 @@ import io.kvision.panel.fieldsetPanel
 import io.kvision.panel.flexPanel
 import io.kvision.utils.perc
 import io.kvision.utils.px
-import io.kvision.utils.vh
 
 class CategoryApp : DesktopWindow("Temario", "fa-solid fa-book-open", 900, 400) {
     init {
@@ -24,19 +23,25 @@ class CategoryApp : DesktopWindow("Temario", "fa-solid fa-book-open", 900, 400) 
 
         flexPanel(FlexDirection.ROW, FlexWrap.WRAP, alignContent = AlignContent.STRETCH, alignItems = AlignItems.STRETCH) {
             justifyContent = JustifyContent.CENTER
-            for (i in 1..7) {
-                add(createCard("Tema $i", "Descripción del Tema $i", "Una descripcion de $i"))
+            for (i in temas) {
+                add(createCard(i.nombre, i.subtitulo, i.descripcion, i.rutaBanner))
             }
         }
     }
-    private fun createCard(titulo: String, subtitulo: String, descripcion: String): FieldsetPanel {
+    private fun createCard(titulo: String, subtitulo: String, descripcion: String, banner: String): FieldsetPanel {
         return fieldsetPanel(titulo) {
             paddingTop = 10.px
             paddingBottom = 10.px
             margin = 10.px
             div(subtitulo){ addCssClass("card-subtitle")}
-            image(src = "static/banner.png", alt = "").apply { width = 100.perc }
-            div(descripcion) { addCssClass("card-text")}
+            image(src = banner, alt = titulo).apply {
+                width = 100.perc
+                maxHeight = 350.px
+                maxWidth = 600.px
+            }
+            div(descripcion) { addCssClass("card-text")}.apply {
+                maxWidth = 600.px
+            }
             link("Ir a...", "#")
         }
     }
