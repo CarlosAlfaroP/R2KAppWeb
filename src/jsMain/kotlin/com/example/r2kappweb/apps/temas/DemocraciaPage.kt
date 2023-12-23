@@ -1,4 +1,6 @@
 package com.example.r2kappweb.apps.temas
 
-class DemocraciaPage {
+import io.kvision.panel.SimplePanel
+
+class DemocraciaPage : SimplePanel() {
 }
