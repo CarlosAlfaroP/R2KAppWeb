@@ -44,8 +44,10 @@ class HomeScreen(private val root: Root, private val onLogout: () -> Unit) : Sim
                         Paint.run(root)
                     }
                     ddLink("Web Browser", "#", icon = "fab fa-firefox").onClick {
-                        //WebBrowser.run(this@root)
                         WebBrowser.run(root)
+                    }
+                    ddLink("R2K App", "#", icon = "fa-solid fa-book-open").onClick {
+                        CategoryApp.run(root)
                     }
                     separator()
                     ddLink("About", "#", icon = "fas fa-info-circle").onClick {
