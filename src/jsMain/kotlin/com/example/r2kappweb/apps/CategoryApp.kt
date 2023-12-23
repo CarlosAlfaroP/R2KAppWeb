@@ -13,15 +13,15 @@ import io.kvision.utils.perc
 import io.kvision.utils.px
 
 class CategoryApp : DesktopWindow("Temario", "fa-solid fa-book-open", 900, 400) {
-    private lateinit var contentPanel: FlexPanel
+    private var contentPanel: FlexPanel
     init {
         isResizable = true
         maximizeButton = true
         minimizeButton = true
         minWidth = 400.px
         minHeight = 150.px
-        height = 450.px
-        width = 600.px
+        height = 900.px //450
+        width = 800.px //600
         padding = 2.px
 
         val cardFlexPanel = flexPanel(FlexDirection.ROW, FlexWrap.WRAP, alignContent = AlignContent.STRETCH, alignItems = AlignItems.STRETCH) {
@@ -37,12 +37,12 @@ class CategoryApp : DesktopWindow("Temario", "fa-solid fa-book-open", 900, 400) 
         contentPanel.removeAll()
         when(idTema) {
             "persona" -> contentPanel.add(PersonaPage(this::mostrarTarjetas))
-            "familia" -> contentPanel.add(FamiliaPage())
-            "sociedad" -> contentPanel.add(SociedadPage())
-            "democracia" -> contentPanel.add(DemocraciaPage())
-            "constitucion" -> contentPanel.add(ConstitucionPage())
-            "estado" -> contentPanel.add(EstadoPage())
-            "legislativo" -> contentPanel.add(LegislativoPage())
+            "familia" -> contentPanel.add(FamiliaPage(this::mostrarTarjetas))
+            "sociedad" -> contentPanel.add(SociedadPage(this::mostrarTarjetas))
+            "democracia" -> contentPanel.add(DemocraciaPage(this::mostrarTarjetas))
+            "constitucion" -> contentPanel.add(ConstitucionPage(this::mostrarTarjetas))
+            "estado" -> contentPanel.add(EstadoPage(this::mostrarTarjetas))
+            "legislativo" -> contentPanel.add(LegislativoPage(this::mostrarTarjetas))
         }
     }
     private fun mostrarTarjetas() {
