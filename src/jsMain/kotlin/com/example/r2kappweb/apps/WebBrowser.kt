@@ -27,11 +27,11 @@ class WebBrowser : DesktopWindow("Web Browser", "fab fa-firefox", 900, 400) {
     val urlInput: TextInput
 
     init {
-        caption = "Web Browser - Due to security reasons navigation is limited to the same domain!"
+        caption = "Web Browser - Por razones de seguridad está limitado al mismo dominio."
         minWidth = 400.px
         minHeight = 150.px
         padding = 2.px
-        iframe = Iframe("http://www.uniacc.cl").apply {
+        iframe = Iframe("https://www.uniacc.cl").apply {
             width = 100.perc
             height = 340.px
         }
