@@ -2,12 +2,11 @@ package com.example.r2kappweb.apps.temas
 
 import io.kvision.core.*
 import io.kvision.html.*
-import io.kvision.panel.SimplePanel
 import io.kvision.panel.VPanel
 import io.kvision.utils.perc
-import io.kvision.utils.vh
+import io.kvision.utils.px
 
-class PersonaPage : VPanel() {
+class PersonaPage(private val onBack: () -> Unit) : VPanel() {
     init {
         this.style {
             display = Display.FLEX
@@ -42,17 +41,25 @@ class PersonaPage : VPanel() {
         p("Entender cómo los derechos humanos están presentes en nuestra vida diaria es fundamental... ¡Vivamos con dignidad, libertad y justicia en nuestro día a día!")
         iframe(src = "https://www.youtube.com/embed/7c0Toimm8U4?si=NfduDqw6T-siK_Gk") {
             width = 100.perc
-            iframeWidth = 800
-            iframeHeight = 400
+            //iframeWidth = 800
+            //iframeHeight = 400
+            iframeWidth = 500
+            iframeHeight = 380
+            maxWidth = 600.px
+            maxHeight = 400.px
         }
         p()
         h2("Valida lo que aprendiste! Crees poder?")
         p()
         iframe(src = "https://wordwall.net/es/embed/b897e4f1bb94432385308aed4305f37e?themeId=1&templateId=3&fontStackId=2") {
             width = 50.perc
-            iframeWidth = 500
-            iframeHeight = 380
+            iframeWidth = 600
+            iframeHeight = 400
+            maxWidth = 500.px
+        }
+        p()
+        button("Volver", style = ButtonStyle.DARK).onClick {
+            onBack()
         }
     }
-
 }

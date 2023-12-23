@@ -32,11 +32,11 @@ class CategoryApp : DesktopWindow("Temario", "fa-solid fa-book-open", 900, 400) 
         }
         contentPanel = cardFlexPanel
     }
-
+    //Indice de id
     private fun mostrarContenidoTema(idTema: String) {
         contentPanel.removeAll()
         when(idTema) {
-            "persona" -> contentPanel.add(PersonaPage())
+            "persona" -> contentPanel.add(PersonaPage(this::mostrarTarjetas))
             "familia" -> contentPanel.add(FamiliaPage())
             "sociedad" -> contentPanel.add(SociedadPage())
             "democracia" -> contentPanel.add(DemocraciaPage())
@@ -45,6 +45,20 @@ class CategoryApp : DesktopWindow("Temario", "fa-solid fa-book-open", 900, 400) 
             "legislativo" -> contentPanel.add(LegislativoPage())
         }
     }
+    private fun mostrarTarjetas() {
+        contentPanel.removeAll()
+        contentPanel.add(createPanel())
+    }
+    //Panel de Cards
+    private fun createPanel(): FlexPanel {
+        return flexPanel(FlexDirection.ROW, FlexWrap.WRAP, alignContent = AlignContent.STRETCH, alignItems = AlignItems.STRETCH) {
+            justifyContent = JustifyContent.CENTER
+            for (carta in cards) {
+                add(createCard(carta))
+            }
+        }
+    }
+    //Cards
     private fun createCard(carta: Tema): FieldsetPanel {
         return fieldsetPanel(carta.nombre) {
             paddingTop = 10.px
@@ -60,10 +74,13 @@ class CategoryApp : DesktopWindow("Temario", "fa-solid fa-book-open", 900, 400) 
                 maxWidth = 600.px
             }
             link("Ir a...", "#").onClick {
-                (this@CategoryApp).mostrarContenidoTema(carta.id)
+                //Si se realiza llama a .removeAll y borra el contenido
+                //(this@CategoryApp).mostrarContenidoTema(carta.id)
+                mostrarContenidoTema(carta.id)
             }
         }
     }
+
     companion object {
         fun run(container: Container) {
             container.add(CategoryApp())
