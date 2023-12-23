@@ -51,7 +51,7 @@ class HomeScreen(private val root: Root, private val onLogout: () -> Unit) : Sim
                     }
                     separator()
                     ddLink("About", "#", icon = "fas fa-info-circle").onClick {
-                        Alert.show("Right to Know, la App", "Esta es una ventana emergente de ejemplo.")
+                        Alert.show("Right to Know, la App", "Esta es una aplicación con fines educativos.")
                     }
                     ddLink("LogOut", "#", icon = "fas fa-power-off").onClick {
                         onLogout()
