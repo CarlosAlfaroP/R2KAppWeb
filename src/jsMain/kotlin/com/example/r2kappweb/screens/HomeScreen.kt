@@ -6,6 +6,7 @@ import io.kvision.dropdown.ddLink
 import io.kvision.dropdown.dropDown
 import io.kvision.dropdown.separator
 import io.kvision.html.Image
+import io.kvision.html.ImageShape
 import io.kvision.html.Link
 import io.kvision.modal.Alert
 import io.kvision.navbar.Nav
@@ -60,6 +61,22 @@ class HomeScreen(private val root: Root, private val onLogout: () -> Unit) : Sim
             }
             taskBar = nav()
         }
+        val artukImage = Image(io.kvision.require("static/artuk_idea.png"), shape = ImageShape.CIRCLE).apply {
+            maxWidth = 100.perc
+            width = 200.px
+            height = 200.px
+            position = Position.FIXED
+            marginLeft = 150.px
+            marginTop = 250.px
+
+            enablePopover(
+                PopoverOptions(
+                    title = ("Artúk:"),
+                    content = "Prueba con algún ícono o desde el Menú."
+                )
+            )
+        }
+        add(artukImage)
 
         flexPanel(
             FlexDirection.COLUMN,
@@ -119,6 +136,7 @@ class HomeScreen(private val root: Root, private val onLogout: () -> Unit) : Sim
                 }
             })
         }
+
     }
     companion object {
 
