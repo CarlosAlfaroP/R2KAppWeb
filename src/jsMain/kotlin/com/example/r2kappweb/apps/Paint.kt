@@ -37,42 +37,42 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
                 alignItems = AlignItems.CENTER
                 paddingTop = 5.px
                 this@Paint.buttonPoint = button("", "fas fa-circle", ButtonStyle.SECONDARY) {
-                    title = "Point"
+                    title = "Punto"
                     onClick {
                         canvas.selectedTool = Tool.POINT
                         this@Paint.selectTool(this)
                     }
                 }
                 this@Paint.buttonPencil = button("", "fas fa-pencil-alt", ButtonStyle.SECONDARY) {
-                    title = "Pencil"
+                    title = "Pincel"
                     onClick {
                         canvas.selectedTool = Tool.PENCIL
                         this@Paint.selectTool(this)
                     }
                 }
                 this@Paint.buttonLine = button("", "fas fa-minus", ButtonStyle.SECONDARY) {
-                    title = "Line"
+                    title = "Linea"
                     onClick {
                         canvas.selectedTool = Tool.LINE
                         this@Paint.selectTool(this)
                     }
                 }
                 this@Paint.buttonRectangle = button("", "far fa-square", ButtonStyle.SECONDARY) {
-                    title = "Rectangle"
+                    title = "Rectánglulo"
                     onClick {
                         canvas.selectedTool = Tool.RECTANGLE
                         this@Paint.selectTool(this)
                     }
                 }
                 this@Paint.buttonCircle = button("", "far fa-circle", ButtonStyle.SECONDARY) {
-                    title = "Circle"
+                    title = "Circulo"
                     onClick {
                         canvas.selectedTool = Tool.CIRCLE
                         this@Paint.selectTool(this)
                     }
                 }
                 button("", "fas fa-undo", ButtonStyle.SECONDARY) {
-                    title = "Undo"
+                    title = "Deshacer"
                     marginTop = 20.px
                     onClick {
                         canvas.undo()
@@ -80,7 +80,7 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
                 }
 
                 button("", "fas fa-ban", ButtonStyle.SECONDARY) {
-                    title = "Clear"
+                    title = "Limpiar todo"
                     onClick {
                         canvas.clearAll()
                     }
@@ -94,7 +94,7 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
 
                 hPanel(spacing = 6) {
                     icon("far fa-heart") {
-                        title = "Line color"
+                        title = "Color de linea"
                         marginRight = 4.px
                     }
                     colorTable.forEach { color ->
@@ -113,7 +113,7 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
 
                 hPanel(spacing = 6) {
                     icon("fas fa-heart") {
-                        title = "Fill color"
+                        title = "Ajustar color"
                         marginRight = 4.px
                     }
                     colorTable.forEach { color ->
@@ -129,7 +129,7 @@ class Paint : DesktopWindow("Paint", "fas fa-paint-brush", 700, 400) {
                         this@Paint.fillColorButtons.add(b)
                     }
                     val b = button("", className = "stripes") {
-                        title = "Empty fill"
+                        title = "Emtpy fill"
                         width = 32.px
                         height = 22.px
                         onClick {
@@ -232,7 +232,7 @@ class PaintCanvas(width: Int, height: Int) : Canvas(width, height) {
     }
 
     fun clearAll() {
-        Confirm.show("Are you sure?", "Do you really want to clear your drawing?") {
+        Confirm.show("Lo harás?", "Realmente vas a borrar lo que dibujaste?",yesTitle="Si") {
             if (drawing.size > 0) {
                 drawing.clear()
                 redraw()

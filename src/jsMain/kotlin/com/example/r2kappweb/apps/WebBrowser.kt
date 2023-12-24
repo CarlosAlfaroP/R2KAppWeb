@@ -23,8 +23,8 @@ class WebBrowser : DesktopWindow("Web Browser", "fab fa-firefox", 900, 400) {
             }
         }
 
-    val iframe: Iframe
-    val urlInput: TextInput
+    private val iframe: Iframe
+    private val urlInput: TextInput
 
     init {
         caption = "Web Browser - Por razones de seguridad está limitado al mismo dominio."
@@ -38,6 +38,7 @@ class WebBrowser : DesktopWindow("Web Browser", "fab fa-firefox", 900, 400) {
         urlInput = TextInput().apply {
             width = 200.px
             marginLeft = 10.px
+            value = "https://www.uniacc.cl"
             setEventListener<TextInput> {
                 change = {
                     this@WebBrowser.iframe.location = self.value

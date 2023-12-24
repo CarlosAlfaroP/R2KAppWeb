@@ -22,7 +22,7 @@ repositories {
 // Versions
 val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
-val ktor_version = "2.3.7"
+val ktorVersion = "2.3.7"
 val kotlinSerialVersion = "1.6.2"
 
 kotlin {
@@ -60,10 +60,10 @@ kotlin {
         implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
         implementation("io.kvision:kvision-bootstrap-icons:$kvisionVersion")
         //Ktor
-        implementation("io.ktor:ktor-client-core:$ktor_version")
-        implementation("io.ktor:ktor-client-js:$ktor_version")
-        implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
-        implementation("io.ktor:ktor-client-auth:$ktor_version")
+        implementation("io.ktor:ktor-client-core:$ktorVersion")
+        implementation("io.ktor:ktor-client-js:$ktorVersion")
+        implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+        implementation("io.ktor:ktor-client-auth:$ktorVersion")
         implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinSerialVersion")
     }
     sourceSets["jsTest"].dependencies {

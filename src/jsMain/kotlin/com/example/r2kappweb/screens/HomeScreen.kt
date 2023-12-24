@@ -34,10 +34,10 @@ class HomeScreen(private val root: Root, private val onLogout: () -> Unit) : Sim
         navbar(type = NavbarType.FIXEDTOP) {
             nav {
                 dropDown("Menu", icon = "fab fa-windows", forNavbar = true, arrowVisible = false) {
-                    ddLink("Calculator", "#", icon = "fas fa-calculator").onClick {
+                    ddLink("Calculadora", "#", icon = "fas fa-calculator").onClick {
                         Calculator.run(root)
                     }
-                    ddLink("Text Editor", "#", icon = "fas fa-edit").onClick {
+                    ddLink("Editor de Texto", "#", icon = "fas fa-edit").onClick {
                         TextEditor.run(root)
                     }
                     ddLink("Paint", "#", icon = "fas fa-paint-brush").onClick {
@@ -50,7 +50,7 @@ class HomeScreen(private val root: Root, private val onLogout: () -> Unit) : Sim
                         CategoryApp.run(root)
                     }
                     separator()
-                    ddLink("About", "#", icon = "fas fa-info-circle").onClick {
+                    ddLink("Sobre la App", "#", icon = "fas fa-info-circle").onClick {
                         Alert.show("Right to Know, la App", "Esta es una aplicación con fines educativos.")
                     }
                     ddLink("LogOut", "#", icon = "fas fa-power-off").onClick {
@@ -68,7 +68,7 @@ class HomeScreen(private val root: Root, private val onLogout: () -> Unit) : Sim
         ) {
             marginTop = 70.px
             padding = 30.px
-            add(DesktopIcon("fas fa-calculator", "Calculator").apply {
+            add(DesktopIcon("fas fa-calculator", "Calculadora").apply {
                 onEvent {
                     dblclick = {
                         Calculator.run(root)
@@ -78,7 +78,7 @@ class HomeScreen(private val root: Root, private val onLogout: () -> Unit) : Sim
                     }
                 }
             })
-            add(DesktopIcon("fas fa-edit", "Text Editor").apply {
+            add(DesktopIcon("fas fa-edit", "Editor de Texto").apply {
                 onEvent {
                     dblclick = {
                         TextEditor.run(root)
@@ -118,23 +118,6 @@ class HomeScreen(private val root: Root, private val onLogout: () -> Unit) : Sim
                     }
                 }
             })
-/*
-            val iconImage = Image("static/icon_wb.png").apply {
-                width = 64.px
-                height = 64.px
-            }
-            add(iconImage).apply {
-                onEvent {
-                    dblclick = {
-                        //CategoryScreen()
-                    }
-                    touchstart = {
-                        //CategoryScreen()
-                    }
-                }
-                +"Contenido"
-            }
-*/
         }
     }
     companion object {

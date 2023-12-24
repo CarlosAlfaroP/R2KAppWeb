@@ -6,7 +6,7 @@ import io.kvision.core.UNIT
 import io.kvision.form.text.RichTextInput
 import io.kvision.utils.px
 
-class TextEditor : DesktopWindow("Text Editor", "fas fa-edit", 700, 400) {
+class TextEditor : DesktopWindow("Editor de texto", "fas fa-edit", 700, 400) {
 
     override var height: CssSize?
         get() = super.height
