@@ -39,8 +39,11 @@ open class DesktopWindow(caption: String, icon: String, width: Int, height: Int)
     var minimized: Boolean = false
 
     init {
-        left = ((Random.nextDouble() * 800).toInt()).px
-        top = (51 + (Random.nextDouble() * 100).toInt()).px
+        // Configurar posición inicial aleatoria
+        left = ((Random.nextDouble() * 80).toInt()).px
+        //top = (51 + (Random.nextDouble() * 100).toInt()).px
+        //left = 80.px
+        top = 70.px
         task = addTask(this)
     }
 

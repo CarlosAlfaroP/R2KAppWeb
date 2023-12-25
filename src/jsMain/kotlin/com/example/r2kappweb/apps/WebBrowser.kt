@@ -11,6 +11,7 @@ import io.kvision.navbar.navbar
 import io.kvision.toolbar.buttonGroup
 import io.kvision.utils.perc
 import io.kvision.utils.px
+import io.kvision.window.window
 
 class WebBrowser : DesktopWindow("Web Browser", "fab fa-firefox", 900, 400) {
 
@@ -27,18 +28,19 @@ class WebBrowser : DesktopWindow("Web Browser", "fab fa-firefox", 900, 400) {
     private val urlInput: TextInput
 
     init {
-        caption = "Web Browser - Por razones de seguridad está limitado al mismo dominio."
+        caption = "Web Browser"
         minWidth = 400.px
         minHeight = 150.px
+
         padding = 2.px
-        iframe = Iframe("https://www.uniacc.cl").apply {
+        iframe = Iframe("https://es.kiddle.co/").apply {
             width = 100.perc
             height = 340.px
         }
         urlInput = TextInput().apply {
             width = 200.px
             marginLeft = 10.px
-            value = "https://www.uniacc.cl"
+            value = "https://es.kiddle.co/"
             setEventListener<TextInput> {
                 change = {
                     this@WebBrowser.iframe.location = self.value

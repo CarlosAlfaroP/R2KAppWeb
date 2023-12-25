@@ -15,13 +15,14 @@ import io.kvision.utils.px
 class CategoryApp : DesktopWindow("Temario", "fa-solid fa-book-open", 900, 400) {
     private var contentPanel: FlexPanel
     init {
+        toggleMaximize()
         isResizable = true
         maximizeButton = true
         minimizeButton = true
         minWidth = 400.px
         minHeight = 150.px
-        height = 900.px //450
-        width = 800.px //600
+        //height = 900.px //450
+        //width = 800.px //600
         padding = 2.px
 
         val cardFlexPanel = flexPanel(FlexDirection.ROW, FlexWrap.WRAP, alignContent = AlignContent.STRETCH, alignItems = AlignItems.STRETCH) {

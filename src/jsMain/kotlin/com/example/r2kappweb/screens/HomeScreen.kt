@@ -19,6 +19,7 @@ import io.kvision.panel.flexPanel
 import io.kvision.utils.perc
 import io.kvision.utils.px
 import io.kvision.utils.vh
+import kotlinx.browser.window
 
 class HomeScreen(private val root: Root, private val onLogout: () -> Unit) : SimplePanel() {
     init {
@@ -68,13 +69,18 @@ class HomeScreen(private val root: Root, private val onLogout: () -> Unit) : Sim
             position = Position.FIXED
             marginLeft = 150.px
             marginTop = 250.px
-
             enablePopover(
                 PopoverOptions(
                     title = ("Artúk:"),
-                    content = "Prueba con algún ícono o desde el Menú."
+                    content = "Prueba con algún ícono o desde el Menú.",
                 )
             )
+        }
+        artukImage.onClick {
+            artukImage.showPopover()
+            window.setTimeout({
+                artukImage.hidePopover()
+            }, 3000) // Cambia 3000 a la cantidad de milisegundos que desees (3000 ms = 3 segundos)
         }
         add(artukImage)
 
