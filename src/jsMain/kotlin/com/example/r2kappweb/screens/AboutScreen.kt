@@ -60,7 +60,7 @@ class AboutScreen(private val onBack: () -> Unit) : SimplePanel() {
                     " " +
                     "Artúk es un simpatico robot, si le das click siempre tendrá un consejo. ")
         }
-        val artukImage = Image(io.kvision.require("static/artuk_sorprendido.png"), shape = ImageShape.CIRCLE).apply {
+        val artukImage = Image(io.kvision.require("static/artuk_presentandose.png"), shape = ImageShape.CIRCLE).apply {
             maxWidth = 100.perc
             width = 200.px
             height = 200.px
