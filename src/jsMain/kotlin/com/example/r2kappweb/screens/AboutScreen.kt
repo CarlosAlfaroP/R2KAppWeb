@@ -6,6 +6,7 @@ import io.kvision.panel.SimplePanel
 import io.kvision.utils.perc
 import io.kvision.utils.px
 import io.kvision.utils.vh
+import kotlinx.browser.window
 
 class AboutScreen(private val onBack: () -> Unit) : SimplePanel() {
     init {
@@ -21,6 +22,7 @@ class AboutScreen(private val onBack: () -> Unit) : SimplePanel() {
         val iconImage = Image("static/icon.png").apply {
             width = 100.px
             height = 100.px
+            marginTop = 150.px
         }
         add(iconImage)
 
@@ -32,9 +34,17 @@ class AboutScreen(private val onBack: () -> Unit) : SimplePanel() {
             }
         }
         div {
-            p("Right2Know es una plataforma educativa creada por un apasionado grupo de estudiantes de ingeniería informática en UNIACC. Nuestra aplicación ha sido diseñada para revolucionar la experiencia de desarrollo, aprovechándolo para la creación de una plataforma educativa, brindando herramientas y recursos innovadores a estudiantes y tutores por igual.") {style { textAlign=
+            p("Right to Know: El derecho a saber, es una plataforma educativa y gratuita," +
+                    " creada por un apasionado grupo de estudiantes de ingeniería informática en UNIACC. " +
+                    "Con nosotros aprenderás de manera didáctica :)" +
+                    ""
+            ) {style { textAlign=
                 TextAlign.JUSTIFY }}
-            p("En Right2Know, nos esforzamos por impulsar el aprendizaje de manera colaborativa y efectiva. Nuestra misión es proporcionar a los estudiantes y tutores una plataforma que fomente la excelencia académica y la participación activa en el proceso de enseñanza-aprendizaje.") {style { textAlign=
+            p("Si eres menor de 18, pídele a tu profesor o a un adulto que te cree una cuenta. " +
+                    "Si eres un tutor, profesor o familiar, puedes registrarte gratuitamente con " +
+                    "una cuenta de correo y podrás crear cuentas a tus alumnos desde tu perfil. " +
+                    "Right2Know fomenta la participación activa en el proceso de enseñanza-aprendizaje. "
+            ) {style { textAlign=
                 TextAlign.JUSTIFY }}
         }
 
@@ -45,6 +55,35 @@ class AboutScreen(private val onBack: () -> Unit) : SimplePanel() {
                 margin = 20.px
             }
         }
+        div {
+            p("Mientras estás en R2K Artúk será tu guía! " +
+                    " " +
+                    "Artúk es un simpatico robot, si le das click siempre tendrá un consejo. ")
+        }
+        val artukImage = Image(io.kvision.require("static/artuk_sorprendido.png"), shape = ImageShape.CIRCLE).apply {
+            maxWidth = 100.perc
+            width = 200.px
+            height = 200.px
+            //position = Position.FIXED
+            //marginLeft = 150.px
+            //marginTop = 250.px
+            enablePopover(
+                PopoverOptions(
+                    title = ("Artúk:"),
+                    content = "Hola! Mi número de serie es R2K-Personal01, pero todos me dicen Artúk." +
+                            " " +
+                            "Soy uno de varios asistentes en la biblioteca del conocimiento. " +
+                            "Haré lo mejor para poder asistirte. ",
+                )
+            )
+        }
+        artukImage.onClick {
+            artukImage.showPopover()
+            window.setTimeout({
+                artukImage.hidePopover()
+            }, 15000) // Cambia 3000 a la cantidad de milisegundos que desees (3000 ms = 3 segundos)
+        }
+        add(artukImage)
         div() {
             listTag(
                 ListType.UL,
@@ -63,7 +102,10 @@ class AboutScreen(private val onBack: () -> Unit) : SimplePanel() {
             }
         }
         div() {
-            p("¡Explora las emocionantes características de Right2Know usando el menú de navegación! Desde la gestión de usuarios hasta la participación en actividades educativas, estamos aquí para hacer que tu viaje educativo sea más efectivo y satisfactorio.") {style { textAlign=
+            p("Explora las características como en cualquier computadora, usando el menú y los íconos. " +
+                    "Simplemente revisa los programas que vienen, encontrarás que hay videos y juegos que explorar. " +
+                    "Estamos aquí para hacer que tu viaje educativo sea más efectivo y satisfactorio :)"
+            ) {style { textAlign=
                 TextAlign.JUSTIFY }}
         }
         div {
