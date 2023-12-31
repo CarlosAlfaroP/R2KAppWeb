@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 
-
 plugins {
     val kotlinVersion: String by System.getProperties()
     kotlin("plugin.serialization") version kotlinVersion
@@ -50,6 +49,7 @@ kotlin {
                 }
             })
         }
+
         binaries.executable()
     }
     sourceSets["jsMain"].dependencies {
@@ -57,14 +57,21 @@ kotlin {
         implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
         implementation("io.kvision:kvision-richtext:$kvisionVersion")
         implementation("io.kvision:kvision-bootstrap-upload:$kvisionVersion")
+        implementation("io.kvision:kvision-datetime:$kvisionVersion")
         implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
         implementation("io.kvision:kvision-bootstrap-icons:$kvisionVersion")
+        implementation("io.kvision:kvision-chart:$kvisionVersion")
+        implementation("io.kvision:kvision-tabulator:$kvisionVersion")
+        implementation("io.kvision:kvision-pace:$kvisionVersion")
         //Ktor
         implementation("io.ktor:ktor-client-core:$ktorVersion")
         implementation("io.ktor:ktor-client-js:$ktorVersion")
         implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
         implementation("io.ktor:ktor-client-auth:$ktorVersion")
         implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinSerialVersion")
+        //Supabase
+        //implementation("io.github.jan-tennert.supabase:supabase-kt-wasm-js:2.0.2-wasm0")
+        implementation("io.github.jan-tennert.supabase:postgrest-kt:2.0.2")
     }
     sourceSets["jsTest"].dependencies {
         implementation(kotlin("test-js"))
@@ -79,3 +86,4 @@ rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
     rootProject.the<YarnRootExtension>().reportNewYarnLock = false // true
     rootProject.the<YarnRootExtension>().yarnLockAutoReplace = false // true
 }
+

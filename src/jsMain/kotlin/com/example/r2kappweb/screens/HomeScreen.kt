@@ -21,8 +21,9 @@ import io.kvision.utils.px
 import io.kvision.utils.vh
 import kotlinx.browser.window
 
-class HomeScreen(private val root: Root, private val onLogout: () -> Unit) : SimplePanel() {
+class HomeScreen(private val root: Root, private val username: String, private val onLogout: () -> Unit) : SimplePanel() {
     init {
+        println("Recibiendo usuario $username")
         this.apply {
             style {
                 width = 100.perc
@@ -52,11 +53,15 @@ class HomeScreen(private val root: Root, private val onLogout: () -> Unit) : Sim
                         CategoryApp.run(root)
                     }
                     separator()
-                    ddLink("Sobre la App", "#", icon = "fas fa-info-circle").onClick {
-                        Alert.show("Right to Know, la App", "Esta es una aplicación con fines educativos.")
+                    ddLink("Perfil", "#", icon = "fa-solid fa-user").onClick {
+                        PerfilApp.run(root, username)
                     }
                     ddLink("LogOut", "#", icon = "fas fa-power-off").onClick {
                         onLogout()
+                    }
+                    separator()
+                    ddLink("Sobre la App", "#", icon = "fas fa-info-circle").onClick {
+                        Alert.show("Right to Know, la App", "Esta es una aplicación con fines educativos.")
                     }
                 }
             }

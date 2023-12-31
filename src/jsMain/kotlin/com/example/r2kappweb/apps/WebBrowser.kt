@@ -11,7 +11,6 @@ import io.kvision.navbar.navbar
 import io.kvision.toolbar.buttonGroup
 import io.kvision.utils.perc
 import io.kvision.utils.px
-import io.kvision.window.window
 
 class WebBrowser : DesktopWindow("Web Browser", "fab fa-firefox", 900, 400) {
 
