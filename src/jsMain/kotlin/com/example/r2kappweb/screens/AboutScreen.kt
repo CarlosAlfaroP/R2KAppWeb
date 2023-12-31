@@ -7,16 +7,18 @@ import io.kvision.utils.perc
 import io.kvision.utils.px
 import io.kvision.utils.vh
 import kotlinx.browser.window
-
 class AboutScreen(private val onBack: () -> Unit) : SimplePanel() {
     init {
         this.style {
             display = Display.FLEX
             flexDirection = FlexDirection.COLUMN
-            justifyContent = JustifyContent.CENTER
+            justifyContent = JustifyContent.START
             alignItems = AlignItems.CENTER
             width = 100.perc
-            height = 100.vh
+            height = 130.vh
+            marginLeft = 20.px
+            marginRight = 20.px
+            maxWidth = 900.px
         }
 
         val iconImage = Image("static/icon.png").apply {
@@ -64,9 +66,6 @@ class AboutScreen(private val onBack: () -> Unit) : SimplePanel() {
             maxWidth = 100.perc
             width = 200.px
             height = 200.px
-            //position = Position.FIXED
-            //marginLeft = 150.px
-            //marginTop = 250.px
             enablePopover(
                 PopoverOptions(
                     title = ("Artúk:"),

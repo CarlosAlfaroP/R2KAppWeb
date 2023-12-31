@@ -1,4 +1,4 @@
-package com.example.r2kappweb.apps.temas
+package com.example.r2kappweb.com.example.r2kappweb.apps.temas
 
 import io.kvision.core.*
 import io.kvision.html.*
@@ -15,6 +15,7 @@ class PersonaPage(private val onBack: () -> Unit) : VPanel() {
             flexDirection = FlexDirection.COLUMN
             justifyContent = JustifyContent.CENTER
             alignItems = AlignItems.CENTER
+            margin = 50.px
         }
         // Título del artículo
         image(src = "static/banner_persona.png", alt = "Persona y Derechos Humanos").apply {
@@ -46,18 +47,17 @@ class PersonaPage(private val onBack: () -> Unit) : VPanel() {
         p("Con este conocimiento, nos enfrentamos al desafío y la oportunidad de crear un mundo donde cada persona pueda desarrollarse plenamente. La promoción y protección de los derechos humanos no solo es un deber legal, sino también una invitación a cultivar una sociedad más compasiva y conectada.")
         p("Es esencial recordar que los derechos humanos no son solo para situaciones extremas...")
 
-        // Conclusión o llamado a la acción
+        // Inctustacion de video
         p("Entender cómo los derechos humanos están presentes en nuestra vida diaria es fundamental... ¡Vivamos con dignidad, libertad y justicia en nuestro día a día!")
         iframe(src = "https://www.youtube.com/embed/7c0Toimm8U4?si=NfduDqw6T-siK_Gk") {
             width = 100.perc
-            //iframeWidth = 800
-            //iframeHeight = 400
             iframeWidth = 500
             iframeHeight = 380
             maxWidth = 600.px
             maxHeight = 400.px
         }
         p()
+        // Incrustacion de iframe con un Juego
         h2("Valida lo que aprendiste! Crees poder?")
         p()
         button("Click acá y compruébalo!!" , style = ButtonStyle.DARK, icon = "far fa-window-maximize").onClick {

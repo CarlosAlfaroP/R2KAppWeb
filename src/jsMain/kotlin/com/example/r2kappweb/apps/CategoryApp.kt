@@ -1,6 +1,7 @@
 package com.example.r2kappweb.apps
 
 import com.example.r2kappweb.apps.temas.*
+import com.example.r2kappweb.com.example.r2kappweb.apps.temas.PersonaPage
 import io.kvision.core.*
 import io.kvision.html.div
 import io.kvision.html.image
