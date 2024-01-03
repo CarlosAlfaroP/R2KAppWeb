@@ -4,17 +4,18 @@ import com.example.r2kappweb.backend.*
 import com.example.r2kappweb.screens.UserModel
 import io.kvision.core.*
 import io.kvision.form.FormPanel
+import io.kvision.form.select.Select
 import io.kvision.form.text.Password
 import io.kvision.form.text.Text
+import io.kvision.form.text.TomTypeahead
 import io.kvision.form.time.DateTime
-import io.kvision.html.ButtonStyle
-import io.kvision.html.button
-import io.kvision.html.div
+import io.kvision.html.*
 import io.kvision.modal.Alert
 import io.kvision.panel.tab
 import io.kvision.panel.tabPanel
 import io.kvision.panel.vPanel
 import io.kvision.table.*
+import io.kvision.table.Table
 import io.kvision.utils.px
 import io.kvision.window.Window
 import kotlinx.coroutines.*
@@ -86,7 +87,7 @@ class PerfilApp(private val root: Container, private val usuario: String) : Desk
                 add(formPanel)
             }
             tab("Alumnos") {
-                table(
+                val tablaAlumnos = table(
                     listOf("Nombre", "Nombre de Usuario", "Fecha de Nacimiento", "Correo"),
                     setOf(TableType.BORDERED, TableType.SMALL, TableType.STRIPED, TableType.HOVER),
                     responsiveType = ResponsiveType.RESPONSIVE, tbodyDivider = true
@@ -100,10 +101,61 @@ class PerfilApp(private val root: Container, private val usuario: String) : Desk
                         }
                     }
                 }
-                button("Añadir Alumno", style = ButtonStyle.INFO).onClick {
-                    val addAlumnoWindow = ShowcaseVentanaAlumno("Añadir Nuevo Alumno",usuario)
-                    this@PerfilApp.add(addAlumnoWindow)
-                    addAlumnoWindow.show()
+                add(tablaAlumnos)
+                div {
+                    this.style{
+                        display = Display.FLEX
+                        justifyContent = JustifyContent.CENTER
+                        margin = 10.px
+                    }
+                    button("Añadir Alumno", style = ButtonStyle.INFO) {
+                        style {
+                            margin = 5.px
+                            borderRadius = 10.px
+                        }
+                        onClick {
+                            val addAlumnoWindow = ShowcaseVentanaAlumno("Añadir Nuevo Alumno",usuario)
+                            this@PerfilApp.add(addAlumnoWindow)
+                            addAlumnoWindow.show()
+                        }
+                    }
+                    button("Refrescar Lista", style = ButtonStyle.SECONDARY) {
+                        style {
+                            margin = 5.px
+                            borderRadius = 10.px
+                        }
+                        onClickLaunch {
+                            actualizarListaAlumnos(tablaAlumnos)
+                        }
+                    }
+                }
+
+                div {
+                    style {
+                        display = Display.FLEX
+                        flexDirection = FlexDirection.COLUMN
+                        alignItems = AlignItems.CENTER
+                    }
+                    label("Selecciona un Alumno a eliminar")
+                    val opcionesAlumnos = listaUsuario.map { it.nombre_usuario to it.nombre }
+                    val selectAlumnos = Select(
+                        options = opcionesAlumnos,
+                        emptyOption = true,
+                        label = "Alumnos"
+                    )
+                    add(selectAlumnos)
+
+                    button("Eliminar Alumno", style = ButtonStyle.DANGER).onClickLaunch {
+                        val alumnoSeleccionado = selectAlumnos.getValue()
+                        println("alumnoSeleccionado es $alumnoSeleccionado")
+                        if (!alumnoSeleccionado.isNullOrBlank()) {
+                            //eliminarAlumno(alumnoSeleccionado)
+                            println("Se elimina $alumnoSeleccionado")
+                            actualizarListaAlumnos(tablaAlumnos)
+                        } else {
+                            Alert.show("Selección Requerida", "Por favor, selecciona un alumno para eliminar", centered = true)
+                        }
+                    }
                 }
             }
         }
@@ -132,7 +184,7 @@ class PerfilApp(private val root: Container, private val usuario: String) : Desk
                     add(
                         NuevoAlumno::edad,
                         DateTime(label = "Fecha de nacimiento").apply { placeholder = "YYYY-MM-DD" },
-                        required = false,
+                        required = true,
                         requiredMessage = "Fecha de nacimiento requerida"
                     )
                     add(
@@ -162,7 +214,21 @@ class PerfilApp(private val root: Container, private val usuario: String) : Desk
 
                             if (contraseña == confirmarContraseña) {
                                 println("datosAlumno: $datosFormulario")
-                                registrarAlumno(datosFormulario,nombreUsuario)
+                                try {
+                                    registrarAlumno(datosFormulario,nombreUsuario)
+                                    Alert.show(
+                                        "Registro Exitoso",
+                                        "Alumno registrado con exito",
+                                        centered = true
+                                    )
+                                    formPanel.clearData()
+                                } catch ( e: Exception) {
+                                    Alert.show(
+                                        "Error en el Registro",
+                                        "No se puede registrar el alumno",
+                                        centered = true
+                                    )
+                                }
                             } else {
                                 Alert.show(
                                     "Error en el Formulario",
@@ -180,7 +246,6 @@ class PerfilApp(private val root: Container, private val usuario: String) : Desk
             }
         }
     }
-
     private fun Container.addTabPanel(formPanel: FormPanel<UserModel>, perfilUsuarioDB: UsuarioDB) {
         val fechaNacimiento = perfilUsuarioDB.edad?.replace("-", "/")
         val fechaDate = fechaNacimiento?.let { Date(it) }
@@ -201,6 +266,19 @@ class PerfilApp(private val root: Container, private val usuario: String) : Desk
             add(UserModel::edad, DateTime(label = "Fecha de nacimiento", format = "YYYY-MM-DD", value = fechaDate))
         }
         add(formPanel)
+    }
+
+    private suspend fun Container.actualizarListaAlumnos(tabla: Table) {
+        val listaActualizada = consultaListaAlumnos(usuario)
+        tabla.removeAll()
+        listaActualizada.forEach { usuario ->
+            tabla.row {
+                cell { +usuario.nombre }
+                cell { +usuario.nombre_usuario }
+                cell { +usuario.edad!! }
+                cell { +(usuario.correo.takeIf { !it.isNullOrBlank() } ?: "No especificado") }
+            }
+        }
     }
 
     fun onDestroy() {

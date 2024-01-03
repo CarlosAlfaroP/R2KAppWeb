@@ -55,14 +55,18 @@ kotlin {
     sourceSets["jsMain"].dependencies {
         implementation("io.kvision:kvision:$kvisionVersion")
         implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
-        implementation("io.kvision:kvision-richtext:$kvisionVersion")
         implementation("io.kvision:kvision-bootstrap-upload:$kvisionVersion")
         implementation("io.kvision:kvision-datetime:$kvisionVersion")
+        implementation("io.kvision:kvision-tom-select:$kvisionVersion")
         implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
-        implementation("io.kvision:kvision-bootstrap-icons:$kvisionVersion")
+
+        implementation("io.kvision:kvision-richtext:$kvisionVersion")
+        implementation("io.kvision:kvision-handlebars:$kvisionVersion")
         implementation("io.kvision:kvision-chart:$kvisionVersion")
         implementation("io.kvision:kvision-tabulator:$kvisionVersion")
         implementation("io.kvision:kvision-pace:$kvisionVersion")
+        implementation("io.kvision:kvision-toastify:$kvisionVersion")
+        implementation("io.kvision:kvision-bootstrap-icons:$kvisionVersion")
         //Ktor
         implementation("io.ktor:ktor-client-core:$ktorVersion")
         implementation("io.ktor:ktor-client-js:$ktorVersion")
