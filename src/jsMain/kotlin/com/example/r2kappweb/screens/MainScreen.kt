@@ -41,7 +41,6 @@ class MainScreen(private val onAboutClick: () -> Unit,private val onLoginClick: 
                 }
                 onClick {
                     onAboutClick()
-                    println("Default button clicked")
                 }
             }
             button("Login", style = ButtonStyle.DARK) {
@@ -51,7 +50,6 @@ class MainScreen(private val onAboutClick: () -> Unit,private val onLoginClick: 
                 }
                 onClick {
                     onLoginClick()
-                    println("Login button clicked")
                 }
             }
         }

@@ -2,7 +2,6 @@ package com.example.r2kappweb.backend
 
 // llave no incluida en GIT, añadir a .gitignore
 import com.example.r2kappweb.llave
-import com.example.r2kappweb.screens.UserModel
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
@@ -13,7 +12,6 @@ import kotlinx.serialization.Serializable
 import kotlin.js.Date
 
 suspend fun loginUsuario (usuario: String, contraseña: String): Boolean {
-    println("Init loginusuario")
     val supabaseClient = createSupabaseClient(
         supabaseUrl = llave.SUPABASE_URL,
         supabaseKey = llave.SUPABASE_ANON_KEY
@@ -28,7 +26,6 @@ suspend fun loginUsuario (usuario: String, contraseña: String): Boolean {
             }
         }
         .decodeSingle<RespuestaUsuario>()
-    println("Usuario ${respuesta.nombre_usuario} + ${respuesta.password}")
     return if (respuesta != null) {
         respuesta.password == contraseña
     } else {
@@ -37,14 +34,12 @@ suspend fun loginUsuario (usuario: String, contraseña: String): Boolean {
 }
 
 suspend fun registerUsuario (usuario: UsuarioDB) {
-    println("Init RegisterUsuario")
     val supabaseClient = createSupabaseClient(
         supabaseUrl = llave.SUPABASE_URL,
         supabaseKey = llave.SUPABASE_ANON_KEY
     ) {
         install(Postgrest)
     }
-    println("$usuario")
     val consulta = consultaUsuario(usuario,supabaseClient)
     println("consulta es $consulta")
     println("end consulta")
@@ -175,19 +170,102 @@ suspend fun obtenerPerfil(username: String) : UsuarioDB {
     return objeto
 }
 
-suspend fun actualizarPerfil(datosActualizados: UserModel) {
-    println("Init Consulta Lista")
+suspend fun actualizarPerfil(usuarioActualizado: UsuarioDB): UsuarioDB? {
+    println("Init actualizarPerfil")
     val supabaseClient = createSupabaseClient(
         supabaseUrl = llave.SUPABASE_URL,
         supabaseKey = llave.SUPABASE_ANON_KEY
     ) {
         install(Postgrest)
     }
-
+    return try {
+        val resultado = supabaseClient.from("usuarios")
+            .update(
+                UsuarioDB(
+                    nombre = usuarioActualizado.nombre,
+                    edad = usuarioActualizado.edad,
+                    password = usuarioActualizado.password,
+                    correo = usuarioActualizado.correo,
+                    nombre_usuario = usuarioActualizado.nombre_usuario,
+                    tipo_usuario = "tutor",
+                    id_tutor = null
+                )
+            ) {
+                select()
+                filter {
+                    eq("nombre_usuario", usuarioActualizado.nombre_usuario)
+                }
+            }.decodeSingle<RespuestaUsuarioDBActualizado>()
+        println("Resultado: $resultado")
+        val resultadoUsuarioDB = UsuarioDB(
+            nombre = resultado.nombre,
+            nombre_usuario = resultado.nombre_usuario,
+            edad = resultado.edad,
+            password = resultado.password,
+            correo = resultado.correo,
+            tipo_usuario = resultado.tipo_usuario,
+            id_tutor = resultado.id_tutor
+        )
+        return resultadoUsuarioDB
+    } catch (e: Exception) {
+        println("Error al actualizar el perfil: ${e.message}")
+        null
+    }
 }
 
+suspend fun actualizarAlumno(datosAlumno: UsuarioDB): Boolean {
+    val supabaseClient = createSupabaseClient(
+        supabaseUrl = llave.SUPABASE_URL,
+        supabaseKey = llave.SUPABASE_ANON_KEY
+    ) {
+        install(Postgrest)
+    }
+    val respuestaIdTutor = supabaseClient.from("usuarios")
+        .select(columns = Columns.list("id_tutor")) {
+            filter {
+                eq( "nombre_usuario", datosAlumno.nombre_usuario)
+            }
+        }.decodeSingle<RespuestaTutorId>()
+    val idTutor = respuestaIdTutor.id_tutor
+    val usuarioDB = datosAlumno
+    usuarioDB.id_tutor = idTutor
+    return try {
+        val respuesta = supabaseClient.from("usuarios")
+            .update(usuarioDB) {
+                select()
+                filter {
+                    eq("nombre_usuario", datosAlumno.nombre_usuario)
+                }
+            }
+        val resultado = respuesta.decodeSingleOrNull<UsuarioDB>()
+        resultado != null
+    } catch (e: Exception) {
+        false
+    }
+}
+
+suspend fun eliminarAlumno(nombreUsuarioAlumno: String): Boolean {
+    val supabaseClient = createSupabaseClient(
+        supabaseUrl = llave.SUPABASE_URL,
+        supabaseKey = llave.SUPABASE_ANON_KEY
+    ) {
+        install(Postgrest)
+    }
+    return try {
+        val resultado = supabaseClient.from("usuarios")
+            .delete {
+                filter {
+                    eq("nombre_usuario", nombreUsuarioAlumno)
+                }
+            }
+        true
+    } catch (e: Exception) {
+        false
+    }
+}
+
+
 suspend fun consultaListaAlumnos(username:String) : List<UsuarioDB> {
-    println("Init Consulta Lista")
     val supabaseClient = createSupabaseClient(
         supabaseUrl = llave.SUPABASE_URL,
         supabaseKey = llave.SUPABASE_ANON_KEY
@@ -201,10 +279,7 @@ suspend fun consultaListaAlumnos(username:String) : List<UsuarioDB> {
             }
         }
         .decodeSingle<RespuestaUsernameId>()
-    println("Consulta idUsuario: $consultaIdUsuario")
     val idUsuario = consultaIdUsuario.id_usuario
-    println("El id es: $idUsuario")
-
     val listaObjetos = supabaseClient.from("usuarios")
         .select(columns = Columns.list("nombre", "nombre_usuario", "edad", "password", "correo", "tipo_usuario")) {{}
             filter {
@@ -212,7 +287,6 @@ suspend fun consultaListaAlumnos(username:String) : List<UsuarioDB> {
             }
         }
         .decodeList<UsuarioDB>()
-    println("Consulta listaObjetos: $listaObjetos")
     return listaObjetos
 }
 
@@ -224,6 +298,11 @@ data class RespuestaUsername (
 @Serializable
 data class RespuestaUsernameId (
     val id_usuario: Int
+)
+
+@Serializable
+data class RespuestaTutorId (
+    val id_tutor: Int
 )
 
 @Serializable
@@ -239,15 +318,6 @@ data class RespuestaUsuario (
 )
 
 @Serializable
-data class Usuario(
-    val nombre: String,
-    val nombre_usuario: String,
-    @Contextual var edad: Date?,
-    val password: String,
-    val correo: String,
-)
-
-@Serializable
 data class UsuarioDB(
     val nombre: String,
     val nombre_usuario: String,
@@ -255,11 +325,34 @@ data class UsuarioDB(
     val password: String,
     val correo: String?,
     val tipo_usuario: String,
-    val id_tutor: Int? = null
+    var id_tutor: Int? = null,
+    val id_usuario: Int? = null
+)
+
+@Serializable
+data class RespuestaUsuarioDBActualizado(
+    val nombre: String,
+    val nombre_usuario: String,
+    val edad: String?,
+    val password: String,
+    val correo: String?,
+    val tipo_usuario: String,
+    val id_tutor: Int? = null,
+    val id_usuario: Int?
 )
 
 @Serializable
 data class NuevoAlumno(
+    val nombre: String,
+    val nombre_usuario: String,
+    @Contextual val edad: Date?,
+    val correo: String?,
+    val password: String,
+    val password2: String
+)
+
+@Serializable
+data class AlumnoModel(
     val nombre: String,
     val nombre_usuario: String,
     @Contextual val edad: Date?,

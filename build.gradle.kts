@@ -59,7 +59,6 @@ kotlin {
         implementation("io.kvision:kvision-datetime:$kvisionVersion")
         implementation("io.kvision:kvision-tom-select:$kvisionVersion")
         implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
-
         implementation("io.kvision:kvision-richtext:$kvisionVersion")
         implementation("io.kvision:kvision-handlebars:$kvisionVersion")
         implementation("io.kvision:kvision-chart:$kvisionVersion")

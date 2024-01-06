@@ -23,7 +23,6 @@ import kotlinx.browser.window
 
 class HomeScreen(private val root: Root, private val username: String, private val onLogout: () -> Unit) : SimplePanel() {
     init {
-        println("Recibiendo usuario $username")
         this.apply {
             style {
                 width = 100.perc

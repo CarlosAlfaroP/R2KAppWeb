@@ -6,6 +6,7 @@ import io.kvision.form.FormPanel
 import io.kvision.form.text.Password
 import io.kvision.form.text.Text
 import io.kvision.html.*
+import io.kvision.modal.Alert
 import io.kvision.panel.VPanel
 import io.kvision.utils.perc
 import io.kvision.utils.px
@@ -48,22 +49,19 @@ class LoginScreen(private val onBack: () -> Unit, private val onRegister: () -> 
                     borderRadius = 10.px
                 }
                 onClickLaunch {
-                    println("Click")
                     val confirmarCampos = formPanel.validate()
                     if (confirmarCampos) {
                         val loginData = formPanel.getData() as Map <String, String>
                         val username = loginData["username"] ?: "No encontrado"
                         val password = loginData["password"] ?: "No encontrado"
-                        console.log("Login attempt with Username: $username, Password: $password")
                         val loginExitoso = loginUsuario( username, password )
                         if (loginExitoso) {
-                            console.log("Inicio de sesión exitoso para el usuario: $username")
                             onLoginSuccess(username)
                         } else {
-                            console.log("Error de usuario/contraseña")
+                            Alert.show("Error", "Usuario/contraseña incorrectos", centered = true)
                         }
                     } else {
-                        println("Usuario vacio")
+                        Alert.show("Error", "Rellena correctamente los campos", centered = true)
                     }
                 }
             }

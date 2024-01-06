@@ -58,36 +58,19 @@ class RegisterScreen(private val onBack: () -> Unit) : VPanel() {
             onClickLaunch {
                 //val confirmaCampos = formPanel.validate()
                 if (formPanel.validate()) {
-                val userModelMap = formPanel.getData() as Map<String, Any?>
-                val contraseña = userModelMap["password"] as? String
-                val confirmarContraseña = userModelMap["password2"] as? String
-
-                println("contraseña: $contraseña")
-                println("confirmarContraseña: $confirmarContraseña")
-                //if (esValido && (contraseña == confirmarContraseña)) {
+                    val userModelMap = formPanel.getData() as Map<String, Any?>
+                    val contraseña = userModelMap["password"] as? String
+                    val confirmarContraseña = userModelMap["password2"] as? String
                     if (contraseña == confirmarContraseña) {
-                        val userModel = formPanel.getData()
-                        println("Modelo $userModel")
-                        println("Nombre de usuario ${userModel.username}")
-                        println("Datos del formulario: $userModelMap")
-
                         val nombre = userModelMap["nombre"] as? String ?: "No encontrado"
                         val username = userModelMap["username"] as? String ?: "No encontrado"
                         val email = userModelMap["email"] as? String ?: "No encontrado"
                         val password = userModelMap["password"] as? String ?: "No encontrado"
-                        val password2 = userModelMap["password2"] as? String ?: "No encontrado"
                         // Fecha se debe convertir desde "Fri Dec 01 2023 00:00:00 GMT-0300 (hora de verano de Chile)"
                         val edad = userModelMap["edad"] as? Date
                         val edadFormat = edad?.let {
                             "${it.getFullYear()}-${it.getMonth() + 1}-${it.getDate()}"
                         } ?: "Fecha no encontrada"
-                        println("Nombre: $nombre")
-                        println("Usuario: $username")
-                        println("Email: $email")
-                        println("Contraseña: $password")
-                        println("Confirmación: $password2")
-                        println("Edad: $edad")
-                        println("Edad: $edadFormat")
                         val usuario = UsuarioDB (
                             nombre = nombre,
                             nombre_usuario= username,
@@ -103,7 +86,6 @@ class RegisterScreen(private val onBack: () -> Unit) : VPanel() {
                             "Las contraseñas no coinciden",
                             centered = true
                         )
-                        println("Las contraseñas no coinciden")
                     }
                 } else {
                     Alert.show(
@@ -111,7 +93,6 @@ class RegisterScreen(private val onBack: () -> Unit) : VPanel() {
                         "Falta rellenar campos correctamente",
                         centered = true
                     )
-                    println("Faltan campos")
                 }
             }
         }
