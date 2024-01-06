@@ -32,7 +32,6 @@ class PerfilApp(private val root: Container, private val usuario: String) : Desk
             val consultaTutor  = consultaTutor(usuario)
             val formPanel = FormPanel<UserModel>()
             val listaUsuario = consultaListaAlumnos(usuario)
-            //selectAlumnos = Select(options = listaUsuario.map { it.nombre_usuario to it.nombre }, emptyOption = true, label = "Alumnos")
             if (consultaTutor) {
                 this@PerfilApp.addTutorTabPanel(formPanel, perfilUsuario,listaUsuario)
             } else {
@@ -207,7 +206,6 @@ class PerfilApp(private val root: Container, private val usuario: String) : Desk
                         }
                     }
                 }
-
             }
         }
     }
