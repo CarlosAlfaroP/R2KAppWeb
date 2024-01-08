@@ -71,15 +71,5 @@ class App : Application() {
     }
 }
 fun main() {
-    startApplication(
-        ::App,
-        module.hot,
-        BootstrapModule,
-        BootstrapCssModule,
-        RichTextModule,
-        BootstrapUploadModule,
-        FontAwesomeModule,
-        BootstrapIconsModule,
-        CoreModule
-    )
+    startApplication(::App, module.hot, BootstrapModule, BootstrapCssModule, RichTextModule, BootstrapUploadModule, FontAwesomeModule, BootstrapIconsModule, CoreModule)
 }

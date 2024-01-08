@@ -7,6 +7,7 @@ import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.query.Columns
+import io.kvision.modal.Alert
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import kotlin.js.Date
@@ -32,7 +33,6 @@ suspend fun loginUsuario (usuario: String, contraseña: String): Boolean {
         false
     }
 }
-
 suspend fun registerUsuario (usuario: UsuarioDB) {
     val supabaseClient = createSupabaseClient(
         supabaseUrl = llave.SUPABASE_URL,
@@ -41,26 +41,24 @@ suspend fun registerUsuario (usuario: UsuarioDB) {
         install(Postgrest)
     }
     val consulta = consultaUsuario(usuario,supabaseClient)
-    println("consulta es $consulta")
-    println("end consulta")
     //Comprueba que el usuario exista en la BD, si no existe lo crea
     if (consulta!=null && consulta!="") {
-        println("if consulta no es null")
-        println("El usuario $consulta ya existe")
+        Alert.show(
+            "Registro",
+            "El usuario $consulta ya existe",
+            centered = true
+        )
     } else {
-        println("if es null consulta else")
-        println("${usuario.nombre_usuario} se creará")
-        println("Usuario completo es $usuario")
-        println("Creando objetoDB")
         val objetoDB = usuario.copy(tipo_usuario = usuario.tipo_usuario ?: "tutor")
-            //UsuarioDB (nombre_usuario = usuario.nombre_usuario, nombre = usuario.nombre, correo = usuario.correo, edad = usuario.edad, password = usuario.password, tipo_usuario = "tutor")
-        print("El objeto a crear es $objetoDB")
         supabaseClient.from("usuarios").insert(objetoDB)
+        Alert.show(
+            "Registro",
+            "El usuario $consulta creado",
+            centered = true
+        )
     }
 }
-
 suspend fun registrarAlumno(datosAlumno:  Map<String, Any?>, nombreUsuario: String) {
-    println("Init Consulta Lista")
     val supabaseClient = createSupabaseClient(
         supabaseUrl = llave.SUPABASE_URL,
         supabaseKey = llave.SUPABASE_ANON_KEY
@@ -76,8 +74,6 @@ suspend fun registrarAlumno(datosAlumno:  Map<String, Any?>, nombreUsuario: Stri
         }
         .decodeSingleOrNull<RespuestaUsernameId>()
     val idTutor = consultaIdUsuario?.id_usuario
-    println("El id del tutor es: $idTutor")
-
     // Extraer los valores del Map y convertirlos a los tipos correctos
     val nombre = datosAlumno["nombre"] as? String ?: ""
     val nombreUsuarioAlumno = datosAlumno["nombre_usuario"] as? String ?: ""
@@ -87,8 +83,6 @@ suspend fun registrarAlumno(datosAlumno:  Map<String, Any?>, nombreUsuario: Stri
     val fechaNacimiento = fechaNacimientoJS?.let {
         "${it.getFullYear()}-${it.getMonth() + 1}-${it.getDate()}"
     }
-    println("El datosAlumno es: $datosAlumno")
-
     val usuarioDB = UsuarioDB(
         nombre = nombre,
         nombre_usuario = nombreUsuarioAlumno,
@@ -98,14 +92,9 @@ suspend fun registrarAlumno(datosAlumno:  Map<String, Any?>, nombreUsuario: Stri
         tipo_usuario = "alumno",
         id_tutor = idTutor
     )
-    println("El usuarioDB es: $usuarioDB")
-    val resultado = supabaseClient.from("usuarios").insert(usuarioDB)
-    println("Resultado de la inserción: $resultado")
+    supabaseClient.from("usuarios").insert(usuarioDB)
 }
-
 suspend fun consultaUsuario (usuario: UsuarioDB, cliente:SupabaseClient) : String? {
-    println("Inicia Consulta")
-    println("Usuario es $usuario")
     val username = cliente.from("usuarios")
         .select(columns = Columns.list("nombre_usuario")) {
             filter {
@@ -113,14 +102,10 @@ suspend fun consultaUsuario (usuario: UsuarioDB, cliente:SupabaseClient) : Strin
             }
         }
         .decodeSingleOrNull<RespuestaUsername>()
-    println("username $username")
     val nombre = username?.nombre_usuario
-    println("nombre ${username?.nombre_usuario}")
     return nombre
 }
-
 suspend fun consultaTutor (usuario: String) : Boolean {
-    println("Inicio ConsultaTutor")
     val supabaseClient = createSupabaseClient(
         supabaseUrl = llave.SUPABASE_URL,
         supabaseKey = llave.SUPABASE_ANON_KEY
@@ -143,14 +128,12 @@ suspend fun consultaTutor (usuario: String) : Boolean {
 }
 
 suspend fun obtenerPerfil(username: String) : UsuarioDB {
-    println("Init obtenerPerfil")
     val supabaseClient = createSupabaseClient(
         supabaseUrl = llave.SUPABASE_URL,
         supabaseKey = llave.SUPABASE_ANON_KEY
     ) {
         install(Postgrest)
     }
-    println("consulta es por $username")
     val objeto = supabaseClient.from("usuarios")
         .select(columns = Columns.list(
             "nombre",
@@ -165,13 +148,10 @@ suspend fun obtenerPerfil(username: String) : UsuarioDB {
             }
         }
         .decodeSingle<UsuarioDB>()
-    println("Creado este objeto $objeto")
-
     return objeto
 }
 
 suspend fun actualizarPerfil(usuarioActualizado: UsuarioDB): UsuarioDB? {
-    println("Init actualizarPerfil")
     val supabaseClient = createSupabaseClient(
         supabaseUrl = llave.SUPABASE_URL,
         supabaseKey = llave.SUPABASE_ANON_KEY
@@ -196,7 +176,6 @@ suspend fun actualizarPerfil(usuarioActualizado: UsuarioDB): UsuarioDB? {
                     eq("nombre_usuario", usuarioActualizado.nombre_usuario)
                 }
             }.decodeSingle<RespuestaUsuarioDBActualizado>()
-        println("Resultado: $resultado")
         val resultadoUsuarioDB = UsuarioDB(
             nombre = resultado.nombre,
             nombre_usuario = resultado.nombre_usuario,
@@ -263,7 +242,6 @@ suspend fun eliminarAlumno(nombreUsuarioAlumno: String): Boolean {
         false
     }
 }
-
 
 suspend fun consultaListaAlumnos(username:String) : List<UsuarioDB> {
     val supabaseClient = createSupabaseClient(
