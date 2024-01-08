@@ -1,6 +1,7 @@
 package com.example.r2kappweb.screens
 import com.example.r2kappweb.backend.registerUsuario
 import com.example.r2kappweb.backend.UsuarioDB
+import com.example.r2kappweb.backend.validarEdad
 import io.kvision.core.onClickLaunch
 import io.kvision.form.FormPanel
 import io.kvision.form.text.Password
@@ -68,6 +69,17 @@ class RegisterScreen(private val onBack: () -> Unit) : VPanel() {
                         val password = userModelMap["password"] as? String ?: "No encontrado"
                         // Fecha se debe convertir desde "Fri Dec 01 2023 00:00:00 GMT-0300 (hora de verano de Chile)"
                         val edad = userModelMap["edad"] as? Date
+                        val edadValida = validarEdad(edad)
+
+                        if (!edadValida) {
+                            Alert.show(
+                                "Registro",
+                                "Debes tener al menos 18 años para registrarte",
+                                centered = true
+                            )
+                            return@onClickLaunch
+                        }
+
                         val edadFormat = edad?.let {
                             "${it.getFullYear()}-${it.getMonth() + 1}-${it.getDate()}"
                         } ?: "Fecha no encontrada"

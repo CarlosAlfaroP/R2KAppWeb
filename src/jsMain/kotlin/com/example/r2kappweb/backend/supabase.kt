@@ -45,7 +45,7 @@ suspend fun registerUsuario (usuario: UsuarioDB) {
     if (consulta!=null && consulta!="") {
         Alert.show(
             "Registro",
-            "El usuario $consulta ya existe",
+            "El usuario ${usuario.nombre_usuario} ya existe",
             centered = true
         )
     } else {
@@ -53,7 +53,7 @@ suspend fun registerUsuario (usuario: UsuarioDB) {
         supabaseClient.from("usuarios").insert(objetoDB)
         Alert.show(
             "Registro",
-            "El usuario $consulta creado",
+            "El usuario ${usuario.nombre_usuario} creado",
             centered = true
         )
     }
@@ -259,13 +259,32 @@ suspend fun consultaListaAlumnos(username:String) : List<UsuarioDB> {
         .decodeSingle<RespuestaUsernameId>()
     val idUsuario = consultaIdUsuario.id_usuario
     val listaObjetos = supabaseClient.from("usuarios")
-        .select(columns = Columns.list("nombre", "nombre_usuario", "edad", "password", "correo", "tipo_usuario")) {{}
+        .select(columns = Columns.list("nombre", "nombre_usuario", "edad", "password", "correo", "tipo_usuario")) {
             filter {
                 eq( "id_tutor", idUsuario)
             }
         }
         .decodeList<UsuarioDB>()
     return listaObjetos
+}
+
+fun validarEdad(fechaNacimiento: Date?): Boolean {
+    fechaNacimiento ?: return false
+
+    val fechaActual = Date()
+    val diferenciaAnios = fechaActual.getFullYear() - fechaNacimiento.getFullYear()
+
+    // Crear una nueva fecha para el cumpleaños de este año
+    val cumpleanosEsteAnio = Date(fechaActual.getFullYear(), fechaNacimiento.getMonth(), fechaNacimiento.getDate())
+
+    // Compara las fechas en milisegundos
+    return if (diferenciaAnios > 18) {
+        true
+    } else if (diferenciaAnios == 18) {
+        cumpleanosEsteAnio.getTime() <= fechaActual.getTime()
+    } else {
+        false
+    }
 }
 
 @Serializable
