@@ -82,7 +82,7 @@ class ConstitucionPage (private val onBack: () -> Unit) : VPanel() {
                     }
                 }
             }
-            tab ("Fin") {
+            tab ("Mini-Juego") {
                 vPanel {
                     style {
                         display = Display.FLEX
@@ -94,17 +94,22 @@ class ConstitucionPage (private val onBack: () -> Unit) : VPanel() {
                         marginRight = 10.px
                         maxWidth = 900.px
                     }
-                    // Título del artículo
                     image(src = "static/banner_democracia.png", alt = "La Constitución de Chile").apply {
                         width = 100.perc
                         maxHeight = 350.px
                         maxWidth = 600.px
                     }
-
                     h1("La Constitución de Chile") {
                         addCssClass("title")
                     }
-                    p()
+                    p("Prueba lo aprendido con este mini-juego")
+                    p("Prueba las letras y encuentra las frases.")
+                    iframe(src = "https://wordwall.net/es/embed/cc653d6fcf894666a48a1e21bab8b47a?themeId=44&templateId=73&fontStackId=0") {
+                        iframeWidth = 800
+                        iframeHeight = 600
+                        maxWidth = 900.px
+                    }
+
                     button("Volver", style = ButtonStyle.DARK).onClick {
                         onBack()
                     }

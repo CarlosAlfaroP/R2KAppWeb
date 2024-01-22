@@ -28,7 +28,7 @@ class MainScreen(private val onAboutClick: () -> Unit,private val onLoginClick: 
             )
         }
         add(artukImage)
-        div("Esta es la nueva web.")
+        div("Bienvenido a 'El Derecho a Saber', la WebApp.")
         div {
             style {
                 display = Display.FLEX

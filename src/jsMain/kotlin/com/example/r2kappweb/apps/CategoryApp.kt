@@ -1,7 +1,6 @@
 package com.example.r2kappweb.apps
 
 import com.example.r2kappweb.apps.temas.*
-import com.example.r2kappweb.com.example.r2kappweb.apps.temas.PersonaPage
 import io.kvision.core.*
 import io.kvision.html.div
 import io.kvision.html.image
@@ -16,13 +15,14 @@ import io.kvision.utils.px
 class CategoryApp : DesktopWindow("Temario", "fa-solid fa-book-open", 900, 400) {
     private var contentPanel: FlexPanel
     init {
-        toggleMaximize()
+        //toggleMaximize() Para que inicie maximizado
         isResizable = true
         maximizeButton = true
         minimizeButton = true
         minWidth = 400.px
         minHeight = 150.px
         padding = 2.px
+        height = 680.px
 
         val cardFlexPanel = flexPanel(FlexDirection.ROW, FlexWrap.WRAP, alignContent = AlignContent.STRETCH, alignItems = AlignItems.STRETCH) {
             justifyContent = JustifyContent.CENTER

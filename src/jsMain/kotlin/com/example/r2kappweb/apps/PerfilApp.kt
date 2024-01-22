@@ -1,7 +1,7 @@
 package com.example.r2kappweb.apps
 
 import com.example.r2kappweb.backend.*
-import com.example.r2kappweb.screens.UserModel
+import com.example.r2kappweb.screens.*
 import io.kvision.core.*
 import io.kvision.form.FormPanel
 import io.kvision.form.select.Select

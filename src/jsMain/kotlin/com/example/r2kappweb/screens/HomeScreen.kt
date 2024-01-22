@@ -76,7 +76,7 @@ class HomeScreen(private val root: Root, private val username: String, private v
             enablePopover(
                 PopoverOptions(
                     title = ("Artúk:"),
-                    content = "Prueba con algún ícono o desde el Menú.",
+                    content = "Prueba dándo doble click en algún ícono o desde el Menú en la parte superior.",
                 )
             )
         }

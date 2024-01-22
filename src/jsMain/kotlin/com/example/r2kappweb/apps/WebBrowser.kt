@@ -68,7 +68,7 @@ class WebBrowser : DesktopWindow("Web Browser", "fab fa-firefox", 900, 400) {
                 urlInput.value = iframe.location
             }
         }
-        height = 457.px
+        height = 680.px
     }
 
     companion object {

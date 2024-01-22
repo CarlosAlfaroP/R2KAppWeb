@@ -108,6 +108,14 @@ class AboutScreen(private val onBack: () -> Unit) : SimplePanel() {
                 TextAlign.JUSTIFY }}
         }
         div {
+            iframe(src = "https://www.youtube.com/embed/fFe7mj9TpFY?si=MsPceuAGyqNfNpff&controls=2&fs=1") {
+                width = 100.perc
+                iframeWidth = 560
+                iframeHeight = 315
+                maxWidth = 900.px
+                maxHeight = 700.px
+            }
+            p()
             p("Agradecemos que te unas a nosotros en esta emocionante travesía educativa.")
             p("El Equipo de Right2Know - Estudiantes de Ingeniería Informática de UNIACC")
         }
