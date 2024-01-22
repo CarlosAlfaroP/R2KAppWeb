@@ -241,9 +241,7 @@ class FamiliaPage (private val onBack: () -> Unit) : VPanel() {
                         maxWidth = 600.px
                     }
                     h1("La familia y la sociedad") { addCssClass("title") }
-                    h2("Matrimonio")
-
-                    h2("El Matrimonio en Chile: Una Mirada Sencilla")
+                    h2("El Matrimonio en Chile")
                     p("""    El matrimonio en Chile ha sido siempre muy importante. Antes se consideraba más como una tradición religiosa, pero con el tiempo, las leyes han ido cambiando eso.
     """.trimIndent())
 

@@ -38,30 +38,23 @@ class PersonaPage (private val onBack: () -> Unit) : VPanel() {
                         marginRight = 10.px
                         maxWidth = 900.px
                     }
-                    // Título del artículo
                     image(src = "static/banner_persona.png", alt = "Persona y Derechos Humanos").apply {
                         width = 100.perc
                         maxHeight = 350.px
                         maxWidth = 600.px
                     }
-
-                    h1("La Persona y Los Derechos Humanos") {
-                        addCssClass("title")
-                    }
+                    h1("La Persona y Los Derechos Humanos") { addCssClass("title") }
                     h2("Explorando Nuestra Naturaleza")
-                    // Introducción
+                    p("La idea de persona designa genéricamente a los individuos de la especie humana (Homo sapiens, que significa literalmente “hombre sabio”, variedad de homínidos, que existe hace aproximadamente 190.000 años en nuestro planeta). ")
                     p("""
             La humanidad es un mosaico de experiencias y derechos inherentes. Este artículo examina la complejidad y belleza de la naturaleza humana y su relación intrínseca con los derechos humanos. A través de nuestra capacidad única para crear cultura y vivir en comunidades, resaltamos la importancia de entender y proteger la dignidad humana en todas sus formas.
             Los derechos humanos son un tema que a menudo se asocia con grandes eventos históricos o situaciones extremas de violencia y opresión. 
             Sin embargo, ¿alguna vez te has detenido a pensar en cómo los derechos humanos también están presentes en tu vida diaria? 
             Acompáñanos en este viaje mientras exploramos cómo los derechos humanos influyen en cada momento.
         """.trimIndent())
-                    // Secciones del artículo
                     h2("La Singularidad del Ser Humano")
                     p("Cada persona lleva consigo una mezcla única de influencias biológicas y culturales. Este tejido complejo de experiencias y aprendizajes forma nuestra identidad y moldea nuestras interacciones con el mundo. Reconocer esta singularidad es esencial para entender la importancia de los derechos humanos.")
                     p("Los derechos humanos son aquellos derechos que poseemos simplemente por ser seres humanos...")
-
-                    // Incrustacion de iframe con un Juego
                     h2("Valida lo que aprendiste! Crees poder?")
                     p()
                     button("Click acá y compruébalo!!" , style = ButtonStyle.DARK, icon = "far fa-window-maximize").onClick {
@@ -109,6 +102,81 @@ class PersonaPage (private val onBack: () -> Unit) : VPanel() {
                         maxWidth = 600.px
                         maxHeight = 400.px
                     }
+                    p()
+                    button("Volver", style = ButtonStyle.DARK).onClick {
+                        onBack()
+                    }
+                }
+            }
+            tab("Tipos") {
+                vPanel {
+                    style {
+                        display = Display.FLEX
+                        flexDirection = FlexDirection.COLUMN
+                        justifyContent = JustifyContent.CENTER
+                        alignItems = AlignItems.CENTER
+                        width = 100.perc
+                        marginLeft = 20.px
+                        marginRight = 10.px
+                        maxWidth = 900.px
+                    }
+                    image(src = "static/banner_persona.png", alt = "Persona y Derechos Humanos").apply {
+                        width = 100.perc
+                        maxHeight = 350.px
+                        maxWidth = 600.px
+                    }
+                    h1("La Persona y Los Derechos Humanos") {
+                        addCssClass("title")
+                    }
+                    h2("Persona Natural y Persona Jurídica en el Ordenamiento Jurídico Chileno")
+
+                    p("""    En el Derecho chileno, el concepto de persona es fundamental, siendo el sujeto de derechos y obligaciones. Se distinguen dos tipos: personas naturales (humanas) y jurídicas (ficciones legales).
+    """.trimIndent())
+
+                    h3("1. Persona Natural")
+                    ul {
+                        li("Concepto: Ser humano, sin distinción de edad, sexo, estirpe o condición.")
+                        li("Existencia Natural y Legal: Protección legal desde la concepción y existencia legal desde el nacimiento hasta la muerte.")
+                        li("Requisitos de Existencia Legal: Nacimiento, separación completa del vientre materno, y manifestación de vida tras la separación.")
+                    }
+
+                    h3("Atributos de Personalidad")
+                    ul {
+                        li("Nombre: Individualización social y jurídica.")
+                        li("Domicilio: Lugar de residencia, con relevancia legal.")
+                        li("Capacidad Jurídica: Capacidad de goce y capacidad de ejercicio.")
+                        li("Estado Civil: Relación con instituciones familiares y civiles.")
+                        li("Nacionalidad: Vínculo jurídico con un Estado.")
+                        li("Patrimonio: Conjunto de derechos y obligaciones valorables económicamente.")
+                    }
+
+                    h3("2. Persona Jurídica")
+                    ul {
+                        li("Definición: Entidad ficticia capaz de ejercer derechos y contraer obligaciones.")
+                        li("Creación: Requiere independencia de sus miembros y reconocimiento estatal.")
+                    }
+
+                    h3("Tipologías")
+                    ul {
+                        li("Personas Jurídicas de Derecho Internacional: Estados y organizaciones internacionales.")
+                        li("Personas Jurídicas de Derecho Público: Estado, Gobiernos Regionales, municipalidades, iglesias reconocidas.")
+                        li("Personas Jurídicas de Derecho Privado: Entidades de iniciativa particular.")
+                    }
+
+                    h3("Atributos de Personalidad de Personas Jurídicas")
+                    ul {
+                        li("Nombre y Domicilio: Identificación y sede legal.")
+                        li("Nacionalidad: Determinada por el país de autorización o sede.")
+                        li("Patrimonio: Recursos para cumplir sus fines.")
+                        li("Capacidad: Ejercer derechos y obligaciones civiles.")
+                    }
+
+                    h3("Aspectos Legales Relevantes")
+                    p("""    Responsabilidad Penal: Incorporada por la Ley Nº 20.393, aplicable a delitos específicos como lavado de dinero y cohecho.
+    """.trimIndent())
+
+                    p("""    Esta distinción entre personas naturales y jurídicas es crucial en el derecho chileno, regulando la forma en que individuos y entidades participan en la sociedad y cómo se les asignan responsabilidades y derechos.
+    """.trimIndent())
                     p()
                     button("Volver", style = ButtonStyle.DARK).onClick {
                         onBack()
