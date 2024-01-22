@@ -38,7 +38,7 @@ class ConstitucionPage (private val onBack: () -> Unit) : VPanel() {
                         marginRight = 10.px
                         maxWidth = 900.px
                     }
-                    image(src = "static/banner_democracia.png", alt = "La Constitución de Chile").apply {
+                    image(src = "static/banner_constitucion.png", alt = "La Constitución de Chile").apply {
                         width = 100.perc
                         maxHeight = 350.px
                         maxWidth = 600.px
@@ -94,7 +94,7 @@ class ConstitucionPage (private val onBack: () -> Unit) : VPanel() {
                         marginRight = 10.px
                         maxWidth = 900.px
                     }
-                    image(src = "static/banner_democracia.png", alt = "La Constitución de Chile").apply {
+                    image(src = "static/banner_constitucion.png", alt = "La Constitución de Chile").apply {
                         width = 100.perc
                         maxHeight = 350.px
                         maxWidth = 600.px
@@ -157,7 +157,7 @@ class ConstitucionPage (private val onBack: () -> Unit) : VPanel() {
                         marginRight = 10.px
                         maxWidth = 900.px
                     }
-                    image(src = "static/banner_democracia.png", alt = "La Constitución de Chile").apply {
+                    image(src = "static/banner_constitucion.png", alt = "La Constitución de Chile").apply {
                         width = 100.perc
                         maxHeight = 350.px
                         maxWidth = 600.px
@@ -207,7 +207,7 @@ class ConstitucionPage (private val onBack: () -> Unit) : VPanel() {
                         marginRight = 10.px
                         maxWidth = 900.px
                     }
-                    image(src = "static/banner_democracia.png", alt = "La Constitución de Chile").apply {
+                    image(src = "static/banner_constitucion.png", alt = "La Constitución de Chile").apply {
                         width = 100.perc
                         maxHeight = 350.px
                         maxWidth = 600.px

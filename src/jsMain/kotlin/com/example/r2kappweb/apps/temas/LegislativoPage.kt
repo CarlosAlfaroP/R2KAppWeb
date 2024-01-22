@@ -295,14 +295,12 @@ class LegislativoPage (private val onBack: () -> Unit) : VPanel() {
                         marginRight = 10.px
                         maxWidth = 900.px
                     }
-                    image(src = "static/banner_democracia.png", alt = "La Constitución de Chile").apply {
+                    image(src = "static/banner_legislativo.png", alt = "El Poder Legislativo").apply {
                         width = 100.perc
                         maxHeight = 350.px
                         maxWidth = 600.px
                     }
-                    h1("La Constitución de Chile") {
-                        addCssClass("title")
-                    }
+                    h1("El Poder Legislativo") { addCssClass("title") }
                     p("Prueba lo aprendido con este mini-juego")
                     iframe(src = "https://wordwall.net/es/embed/ab6a7322bc364268a5229d9517acdc52?themeId=23&templateId=49&fontStackId=0") {
                         iframeWidth = 800
