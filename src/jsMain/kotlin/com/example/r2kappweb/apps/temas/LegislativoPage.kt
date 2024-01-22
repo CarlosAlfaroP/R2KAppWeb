@@ -304,7 +304,7 @@ class LegislativoPage (private val onBack: () -> Unit) : VPanel() {
                         addCssClass("title")
                     }
                     p("Prueba lo aprendido con este mini-juego")
-                    iframe(src = "https://wordwall.net/es/embed/cc653d6fcf894666a48a1e21bab8b47a?themeId=44&templateId=73&fontStackId=0") {
+                    iframe(src = "https://wordwall.net/es/embed/ab6a7322bc364268a5229d9517acdc52?themeId=23&templateId=49&fontStackId=0") {
                         iframeWidth = 800
                         iframeHeight = 600
                         maxWidth = 900.px
