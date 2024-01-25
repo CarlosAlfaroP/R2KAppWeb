@@ -77,6 +77,10 @@ class ConstitucionPage (private val onBack: () -> Unit) : VPanel() {
                     p("""    Es el poder de crear o cambiar la Constitución. Puede ser Originario (cuando se crea una nueva Constitución) o Derivado (cuando se modifica una existente). La gente, a través de su voto, es quien tiene este poder.
     """.trimIndent())
                     p()
+                    h4("Quieres saber un poco más?")
+                    p("Descarga el capítulo del temario en el siguiente link:")
+                    link("| Descarga |", "static/documentos/05_constitucion.pdf", target = "_blank")
+                    p()
                     button("Volver", style = ButtonStyle.DARK).onClick {
                         onBack()
                     }
@@ -222,7 +226,6 @@ class ConstitucionPage (private val onBack: () -> Unit) : VPanel() {
                         iframeHeight = 600
                         maxWidth = 900.px
                     }
-
                     button("Volver", style = ButtonStyle.DARK).onClick {
                         onBack()
                     }

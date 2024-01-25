@@ -67,6 +67,10 @@ class DemocraciaPage (private val onBack: () -> Unit) : VPanel() {
                     p("""    En resumen, la democracia es un sistema en el que el poder está en manos del pueblo. Implica libertad, igualdad, respeto y la protección de los derechos humanos. Aunque es un buen sistema, siempre hay espacio para mejorar y asegurarse de que todos en la sociedad tengan voz y sean respetados.
     """.trimIndent())
                     p()
+                    h4("Quieres saber un poco más?")
+                    p("Descarga el capítulo del temario en el siguiente link:")
+                    link("| Descarga |", "static/documentos/04_democracia.pdf", target = "_blank")
+                    p()
                     button("Volver", style = ButtonStyle.DARK).onClick {
                         onBack()
                     }

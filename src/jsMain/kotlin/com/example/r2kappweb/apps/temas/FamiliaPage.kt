@@ -86,10 +86,13 @@ class FamiliaPage (private val onBack: () -> Unit) : VPanel() {
                         }
                     }
                     h2("La familia como pilar de la sociedad")
-                    p(
-                        """    Así, la familia, en cualquiera de sus múltiples formas, es reconocida como pilar de la sociedad y es objeto de especial protección por tratados internacionales sobre derechos humanos y por los ordenamientos jurídicos de prácticamente todos los países del mundo.
+                    p("""    Así, la familia, en cualquiera de sus múltiples formas, es reconocida como pilar de la sociedad y es objeto de especial protección por tratados internacionales sobre derechos humanos y por los ordenamientos jurídicos de prácticamente todos los países del mundo.
     """.trimIndent()
                     )
+                    p()
+                    h4("Quieres saber un poco más?")
+                    p("Descarga el capítulo del temario en el siguiente link:")
+                    link("| Descarga |", "static/documentos/02_familia.pdf", target = "_blank")
                     p()
                     button("Volver", style = ButtonStyle.DARK).onClick {
                         onBack()

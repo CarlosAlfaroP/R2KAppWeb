@@ -103,6 +103,10 @@ class PersonaPage (private val onBack: () -> Unit) : VPanel() {
                         maxHeight = 400.px
                     }
                     p()
+                    h4("Quieres saber un poco más?")
+                    p("Descarga el capítulo del temario en el siguiente link:")
+                    link("| Descarga |", "static/documentos/01_persona.pdf", target = "_blank")
+                    p()
                     button("Volver", style = ButtonStyle.DARK).onClick {
                         onBack()
                     }

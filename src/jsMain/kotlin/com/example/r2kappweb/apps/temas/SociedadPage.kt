@@ -87,6 +87,10 @@ class SociedadPage (private val onBack: () -> Unit) : VPanel() {
             """.trimIndent()
                     )
                     p()
+                    h4("Quieres saber un poco más?")
+                    p("Descarga el capítulo del temario en el siguiente link:")
+                    link("| Descarga |", "static/documentos/03_sociedad.pdf", target = "_blank")
+                    p()
                     button("Volver", style = ButtonStyle.DARK).onClick {
                         onBack()
                     }

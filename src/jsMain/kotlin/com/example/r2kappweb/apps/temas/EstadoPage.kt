@@ -64,6 +64,10 @@ class EstadoPage (private val onBack: () -> Unit) : VPanel() {
                     p("""    Un ejemplo interesante es la Unión Europea, que es como un gran equipo formado por varios países de Europa. Están trabajando juntos de una manera nueva y diferente, compartiendo algunas reglas y trabajando por objetivos comunes.
     """.trimIndent())
                     p()
+                    h4("Quieres saber un poco más?")
+                    p("Descarga el capítulo del temario en el siguiente link:")
+                    link("| Descarga |", "static/documentos/06_estado.pdf", target = "_blank")
+                    p()
                     button("Volver", style = ButtonStyle.DARK).onClick {
                         onBack()
                     }

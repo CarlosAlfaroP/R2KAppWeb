@@ -100,6 +100,10 @@ class LegislativoPage (private val onBack: () -> Unit) : VPanel() {
                     p("""    El Poder Legislativo en Chile, representado por el Senado y la Cámara de Diputados, desempeña un papel crucial en la formación de leyes, representación ciudadana y fiscalización del gobierno, con un proceso legislativo detallado. Además, se destaca su participación en el ámbito internacional y el esfuerzo por la descentralización con la ubicación del Congreso en Valparaíso.
     """.trimIndent())
                     p()
+                    h4("Quieres saber un poco más?")
+                    p("Descarga el capítulo del temario en el siguiente link:")
+                    link("| Descarga |", "static/documentos/07_poder_legislativo.pdf", target = "_blank")
+                    p()
                     button("Volver", style = ButtonStyle.DARK).onClick {
                         onBack()
                     }
