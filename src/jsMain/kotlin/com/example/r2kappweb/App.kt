@@ -20,8 +20,7 @@ class App : Application() {
                 alignItems = AlignItems.CENTER
             }
         }
-        showHomeScreen("carlosalfaro")
-        //showSplashScreen()
+        showSplashScreen()
     }
     private fun showSplashScreen() {
         val splashScreen = SplashScreen(mainPanel) {
