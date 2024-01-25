@@ -20,6 +20,7 @@ class App : Application() {
                 alignItems = AlignItems.CENTER
             }
         }
+
         showSplashScreen()
     }
     private fun showSplashScreen() {
